@@ -80,7 +80,7 @@ def run_bot():
         try:
             feed = feedparser.parse(rss_url)
             
-            for entry in reversed(feed.entries[:2]):
+            for entry in reversed(feed.entries[:5]):
                 link = entry.link
                 
                 if link in posted_links:
