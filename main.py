@@ -63,11 +63,10 @@ def run_bot():
 """
                 response_text = None
                 
-                # حداکثر ۲ بار تلاش با مکث کوتاه
                 for attempt in range(2):
                     try:
                         response = client.models.generate_content(
-                            model='gemini-2.5-flash',
+                            model='gemini-3.6-flash',
                             contents=prompt,
                             config=types.GenerateContentConfig(automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True))
                         )
@@ -76,7 +75,7 @@ def run_bot():
                     except Exception as api_err:
                         err_msg = str(api_err)
                         if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg or "503" in err_msg:
-                            print(f"⚠️ ترافیک یا محدودیت سرور ({err_msg[:30]})... ۱۰ ثانیه مکث")
+                            print(f"⚠️ محدودیت یا ترافیک سرور ({err_msg[:30]})... ۱۰ ثانیه مکث")
                             time.sleep(10)
                         else:
                             print(f"خطا: {err_msg}")
