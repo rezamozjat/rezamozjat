@@ -37,6 +37,7 @@ def run_bot():
         try:
             feed = feedparser.parse(rss_url)
             
+            # بررسی ۲ خبر اخیر هر سایت
             for entry in reversed(feed.entries[:2]):
                 link = entry.link
                 
@@ -46,7 +47,7 @@ def run_bot():
                 title = entry.title
                 summary = entry.summary if 'summary' in entry else title
                 
-                print(f"جدیدترین خبر از {source_name}: {title}")
+                print(f"\n📰 جدیدترین خبر از {source_name}: {title}")
                 
                 prompt = f"""
 تو یک تحلیل‌گر و مترجم ارشد بازار کریپتو هستی. 
@@ -62,26 +63,35 @@ def run_bot():
 """
                 response_text = None
                 
-                for attempt in range(2):
+                # زمان‌های مکث پلکانی (۲۰، ۴۵ و ۷۰ ثانیه)
+                backoff_delays = [20, 45, 70]
+                
+                for attempt, delay in enumerate(backoff_delays, 1):
                     try:
+                        # ۳ ثانیه مکث پیش‌فرض قبل از هر درخواست برای عدم ارسال رگباری
+                        time.sleep(3)
+                        
                         response = client.models.generate_content(
                             model='gemini-3.6-flash',
                             contents=prompt,
-                            config=types.GenerateContentConfig(automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True))
+                            config=types.GenerateContentConfig(
+                                automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True)
+                            )
                         )
                         response_text = response.text
-                        break
+                        break  # درخواست موفق بود، خروج از حلقه Retry
                     except Exception as api_err:
                         err_msg = str(api_err)
                         if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg or "503" in err_msg:
-                            print(f"⚠️ محدودیت یا ترافیک سرور ({err_msg[:30]})... ۶۵ ثانیه مکث برای آزاد شدن سقف دقیقه")
-                            time.sleep(65)
+                            print(f"⚠️ تلاش {attempt}/{len(backoff_delays)}: محدودیت ترافیک ({err_msg[:25]})... مکث {delay} ثانیه‌ای")
+                            time.sleep(delay)
                         else:
-                            print(f"خطا: {err_msg}")
+                            print(f"❌ خطای غیرمنتظره: {err_msg}")
                             break
 
                 if not response_text:
-                    print("❌ عدم دریافت پاسخ از مدل، عبور به خبر بعدی.")
+                    print("❌ عدم دریافت پاسخ پس از چند بار تلاش. مکث ۳۰ ثانیه‌ای پیش از خبر بعدی...")
+                    time.sleep(30)
                     continue
 
                 final_message = f"{response_text}\n\n🔗 [مطالعه اصل خبر]({link})\n\n🆔 {TELEGRAM_CHAT_ID}"
@@ -97,10 +107,13 @@ def run_bot():
                 res = requests.post(telegram_url, data=payload)
                 
                 if res.status_code == 200:
-                    print(f"✅ خبر از {source_name} ارسال شد.")
+                    print(f"✅ خبر با موفقیت در تلگرام ارسال شد.")
                     save_posted_link(link)
                     posted_links.add(link)
-                    time.sleep(5)
+                    # ۱۰ ثانیه مکث بعد از هر ارسال موفق
+                    time.sleep(10)
+                else:
+                    print(f"❌ خطا در ارسال به تلگرام: {res.status_code}")
                 
         except Exception as e:
             print(f"Error processing {source_name}: {e}")
