@@ -2,7 +2,7 @@ name: Crypto News Bot Cron
 
 on:
   schedule:
-    # اجرا در هر ۳۰ دقیقه (بر اساس زمان‌بندی Cron)
+    # اجرا هر ۳۰ دقیقه
     - cron: '*/30 * * * *'
   workflow_dispatch: # امکان اجرای دستی برای تست
 
@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/python-path@v4
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
