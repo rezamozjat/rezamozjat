@@ -125,7 +125,7 @@ def run_bot():
                     print(f"✅ خبر با موفقیت در تلگرام ارسال شد.")
                     save_posted_link(link)
                     posted_links.add(link)
-                    time.sleep(3)
+                    time.sleep(20)
                 else:
                     print(f"❌ خطا در ارسال به تلگرام: {res.status_code}")
                 
