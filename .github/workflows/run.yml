@@ -1,16 +1,15 @@
-name: Crypto News Bot Cron
+name: Run Crypto Bot
 
 on:
   schedule:
-    # اجرا هر 10 دقیقه
-    - cron: '*/10 * * * *'
-  workflow_dispatch: # امکان اجرای دستی برای تست
+    - cron: '0 * * * *'  # اجرا در هر ساعت
+  workflow_dispatch:      # قابلیت اجرای دستی
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -20,19 +19,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install feedparser google-genai requests
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Run script
+      - name: Run Python script
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python main.py
-
-      - name: Save memory (posted links)
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add posted_links.txt || true
-          git commit -m "update posted links" || true
-          git push || true
