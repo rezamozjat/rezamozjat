@@ -37,7 +37,6 @@ def run_bot():
         try:
             feed = feedparser.parse(rss_url)
             
-            # بررسی ۲ خبر اخیر هر سایت
             for entry in reversed(feed.entries[:2]):
                 link = entry.link
                 
@@ -75,8 +74,8 @@ def run_bot():
                     except Exception as api_err:
                         err_msg = str(api_err)
                         if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg or "503" in err_msg:
-                            print(f"⚠️ محدودیت یا ترافیک سرور ({err_msg[:30]})... ۱۰ ثانیه مکث")
-                            time.sleep(10)
+                            print(f"⚠️ محدودیت یا ترافیک سرور ({err_msg[:30]})... ۶۵ ثانیه مکث برای آزاد شدن سقف دقیقه")
+                            time.sleep(65)
                         else:
                             print(f"خطا: {err_msg}")
                             break
