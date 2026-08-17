@@ -37,7 +37,7 @@ def run_bot():
         try:
             feed = feedparser.parse(rss_url)
             
-            # فقط ۲ خبر اخیر هر سایت برای عدم عبور از سقف ۲۱۰ درخواست
+            # بررسی ۲ خبر اخیر هر سایت
             for entry in reversed(feed.entries[:2]):
                 link = entry.link
                 
@@ -61,26 +61,29 @@ def run_bot():
 📝 **خلاصه خبر:** (ترجمه در ۳ جمله)
 💡 **تحلیل کوتاه:** (تحلیل در ۲ جمله)
 """
-                # تلاش با مدیریت خطای سقف سهمیه (Rate Limit)
                 response_text = None
+                
+                # حداکثر ۲ بار تلاش با مکث کوتاه
                 for attempt in range(2):
                     try:
                         response = client.models.generate_content(
-                            model='gemini-3.6-flash',
+                            model='gemini-2.5-flash',
                             contents=prompt,
                             config=types.GenerateContentConfig(automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True))
                         )
                         response_text = response.text
                         break
                     except Exception as api_err:
-                        if "429" in str(api_err) or "RESOURCE_EXHAUSTED" in str(api_err):
-                            print("⚠️ رسیدن به سقف سهمیه Gemini! ۶۰ ثانیه استراحت...")
-                            time.sleep(60)
+                        err_msg = str(api_err)
+                        if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg or "503" in err_msg:
+                            print(f"⚠️ ترافیک یا محدودیت سرور ({err_msg[:30]})... ۱۰ ثانیه مکث")
+                            time.sleep(10)
                         else:
-                            print(f"خطای جمینای: {api_err}")
+                            print(f"خطا: {err_msg}")
                             break
 
                 if not response_text:
+                    print("❌ عدم دریافت پاسخ از مدل، عبور به خبر بعدی.")
                     continue
 
                 final_message = f"{response_text}\n\n🔗 [مطالعه اصل خبر]({link})\n\n🆔 {TELEGRAM_CHAT_ID}"
@@ -99,8 +102,7 @@ def run_bot():
                     print(f"✅ خبر از {source_name} ارسال شد.")
                     save_posted_link(link)
                     posted_links.add(link)
-                    # مکث ۱۵ ثانیه‌ای برای حفظ سقف رایگان
-                    time.sleep(15)
+                    time.sleep(5)
                 
         except Exception as e:
             print(f"Error processing {source_name}: {e}")
