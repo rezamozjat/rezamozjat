@@ -1,6 +1,7 @@
 import os
 import feedparser
 from google import genai
+from google.genai import types
 import requests
 import time
 
@@ -11,7 +12,7 @@ TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
-# منابع خبری معتبر
+# منابع خبری
 RSS_SOURCES = {
     "CoinDesk": "https://www.coindesk.com/arc/outboundfeeds/rss/",
     "CoinTelegraph": "https://cointelegraph.com/rss",
@@ -34,16 +35,14 @@ def save_posted_link(link):
 def run_bot():
     posted_links = load_posted_links()
 
-    # پیمایش تمام منابع خبری
     for source_name, rss_url in RSS_SOURCES.items():
         try:
             feed = feedparser.parse(rss_url)
             
-            # بررسی ۵ خبر اخیر از هر سایت (ارسال از قدیمی‌تر به جدیدتر)
-            for entry in reversed(feed.entries[:5]):
+            # بررسی ۲ خبر جدید از هر سایت برای کاهش تعداد درخواست‌ها
+            for entry in reversed(feed.entries[:2]):
                 link = entry.link
                 
-                # اگر خبر قبلاً فرستاده شده، عبور کن
                 if link in posted_links:
                     continue
                 
@@ -64,9 +63,11 @@ def run_bot():
 📝 **خلاصه خبر:** (ترجمه در ۳ جمله)
 💡 **تحلیل کوتاه:** (تحلیل در ۲ جمله)
 """
+                # ارسال به جمینای به همراه غیرفعال‌سازی هشدار AFC
                 response = client.models.generate_content(
                     model='gemini-3.6-flash',
                     contents=prompt,
+                    config=types.GenerateContentConfig(automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True))
                 )
                 
                 final_message = f"{response.text}\n\n🔗 [مطالعه اصل خبر]({link})\n\n🆔 {TELEGRAM_CHAT_ID}"
@@ -85,8 +86,8 @@ def run_bot():
                     print(f"✅ خبر از {source_name} ارسال شد.")
                     save_posted_link(link)
                     posted_links.add(link)
-                    # وقفه ۵ ثانیه‌ای بین پست‌ها برای جلوگیری از اسپم
-                    time.sleep(5)
+                    # مکث ۱۰ ثانیه‌ای برای عبور از محدودیت API گوگل
+                    time.sleep(10)
                 
         except Exception as e:
             print(f"Error processing {source_name}: {e}")
