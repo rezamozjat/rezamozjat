@@ -29,10 +29,36 @@ def save_posted_link(link):
     with open(DB_FILE, "a", encoding="utf-8") as f:
         f.write(f"{link}\n")
 
-def summarize_with_groq(prompt):
+def get_active_groq_model():
+    """شناسایی خودکار و اولویت‌بندی مدل‌های فعال جدید Groq"""
+    # لیست اولویت‌بندی مدل‌های فعال جدید
+    preferred_order = [
+        "openai/gpt-oss-20b",
+        "openai/gpt-oss-120b",
+        "qwen/qwen3.6-27b"
+    ]
+    
+    try:
+        models_page = client.models.list()
+        active_models = [m.id for m in models_page.data]
+        print(f"📋 مدل‌های فعال حساب شما: {active_models}")
+        
+        for pref in preferred_order:
+            if pref in active_models:
+                return pref
+                
+        if active_models:
+            return active_models[0]
+            
+    except Exception as e:
+        print(f"⚠️ خطا در لیست کردن مدل‌ها از API: {e}")
+        
+    return "openai/gpt-oss-20b"
+
+def summarize_with_groq(prompt, selected_model):
     try:
         completion = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=selected_model,
             messages=[
                 {"role": "user", "content": prompt}
             ],
@@ -41,11 +67,14 @@ def summarize_with_groq(prompt):
         )
         return completion.choices[0].message.content
     except Exception as e:
-        print(f"❌ خطای Groq: {e}")
+        print(f"❌ خطای اجرای مدل {selected_model}: {e}")
         return None
 
 def run_bot():
     posted_links = load_posted_links()
+
+    working_model = get_active_groq_model()
+    print(f"🚀 مدل انتخاب شده: {working_model}")
 
     for source_name, rss_url in RSS_SOURCES.items():
         try:
@@ -74,10 +103,10 @@ def run_bot():
 📝 **خلاصه خبر:** (ترجمه در ۳ جمله)
 💡 **تحلیل کوتاه:** (تحلیل در ۲ جمله)
 """
-                response_text = summarize_with_groq(prompt)
+                response_text = summarize_with_groq(prompt, working_model)
 
                 if not response_text:
-                    print("❌ عدم دریافت پاسخ از مدل، عبور به خبر بعدی...")
+                    print("❌ عدم دریافت پاسخ، عبور به خبر بعدی...")
                     continue
 
                 final_message = f"{response_text}\n\n🔗 [مطالعه اصل خبر]({link})\n\n🆔 {TELEGRAM_CHAT_ID}"
