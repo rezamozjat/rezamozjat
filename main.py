@@ -5,14 +5,12 @@ from google.genai import types
 import requests
 import time
 
-# خواندن متغیرهای امنیتی
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
-# منابع خبری
 RSS_SOURCES = {
     "CoinDesk": "https://www.coindesk.com/arc/outboundfeeds/rss/",
     "CoinTelegraph": "https://cointelegraph.com/rss",
@@ -39,7 +37,7 @@ def run_bot():
         try:
             feed = feedparser.parse(rss_url)
             
-            # بررسی ۲ خبر جدید از هر سایت برای کاهش تعداد درخواست‌ها
+            # فقط ۲ خبر اخیر هر سایت برای عدم عبور از سقف ۲۱۰ درخواست
             for entry in reversed(feed.entries[:2]):
                 link = entry.link
                 
@@ -63,14 +61,29 @@ def run_bot():
 📝 **خلاصه خبر:** (ترجمه در ۳ جمله)
 💡 **تحلیل کوتاه:** (تحلیل در ۲ جمله)
 """
-                # ارسال به جمینای به همراه غیرفعال‌سازی هشدار AFC
-                response = client.models.generate_content(
-                    model='gemini-3.6-flash',
-                    contents=prompt,
-                    config=types.GenerateContentConfig(automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True))
-                )
-                
-                final_message = f"{response.text}\n\n🔗 [مطالعه اصل خبر]({link})\n\n🆔 {TELEGRAM_CHAT_ID}"
+                # تلاش با مدیریت خطای سقف سهمیه (Rate Limit)
+                response_text = None
+                for attempt in range(2):
+                    try:
+                        response = client.models.generate_content(
+                            model='gemini-3.6-flash',
+                            contents=prompt,
+                            config=types.GenerateContentConfig(automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True))
+                        )
+                        response_text = response.text
+                        break
+                    except Exception as api_err:
+                        if "429" in str(api_err) or "RESOURCE_EXHAUSTED" in str(api_err):
+                            print("⚠️ رسیدن به سقف سهمیه Gemini! ۶۰ ثانیه استراحت...")
+                            time.sleep(60)
+                        else:
+                            print(f"خطای جمینای: {api_err}")
+                            break
+
+                if not response_text:
+                    continue
+
+                final_message = f"{response_text}\n\n🔗 [مطالعه اصل خبر]({link})\n\n🆔 {TELEGRAM_CHAT_ID}"
                 
                 telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
                 payload = {
@@ -86,8 +99,8 @@ def run_bot():
                     print(f"✅ خبر از {source_name} ارسال شد.")
                     save_posted_link(link)
                     posted_links.add(link)
-                    # مکث ۱۰ ثانیه‌ای برای عبور از محدودیت API گوگل
-                    time.sleep(10)
+                    # مکث ۱۵ ثانیه‌ای برای حفظ سقف رایگان
+                    time.sleep(15)
                 
         except Exception as e:
             print(f"Error processing {source_name}: {e}")
