@@ -255,3 +255,4 @@ https://decrypt.co/376375/hypeliquid-price-record-high-token-unlock
 https://cointelegraph.com/news/coinbase-taps-chainlink-for-tokenized-stock-data-on-base?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
 https://cointelegraph.com/news/coinbase-stand-crypto-advocacy-group-endorses-midterm-candidates?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
 https://cryptopotato.com/zcash-zec-explodes-to-an-8-year-high-but-an-analyst-warns-of-a-major-crash/
+https://decrypt.co/376393/coinbase-tokenized-stocks-base-ethereum
