@@ -353,3 +353,6 @@ https://decrypt.co/376599/ethereum-devs-propose-deposit-contract-overhaul-to-qua
 https://decrypt.co/376601/xrp-price-leverage-unwind-tests-rally
 https://cryptopotato.com/will-bitcoin-btc-reach-100k-this-quarter-heres-what-3-ais-predict/
 https://cointelegraph.com/markets/bitcoin-dips-below-78k-as-stocks-gold-fall-on-higher-us-pce-data?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
+https://cointelegraph.com/news/77-of-americans-see-crypto-in-retirement-plans-as-risky-survey?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
+https://cointelegraph.com/news/sec-crypto-custody-rules-investment-firms-white-house?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
+https://decrypt.co/376609/tokenized-deposits-bank-lending-dallas-fed
