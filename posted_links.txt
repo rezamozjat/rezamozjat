@@ -733,3 +733,6 @@ https://decrypt.co/377386/fincen-ties-12-7b-to-crypto-scams-run-from-asian-compo
 https://cointelegraph.com/news/south-korean-regulators-tokenized-securities-roadmap?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
 https://cryptopotato.com/trezor-breach-is-much-bigger-than-initially-thought-another-67000-customers-exposed/
 https://cointelegraph.com/news/trezor-data-breach-affects-67k-us-customers?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
+https://cointelegraph.com/news/kalshi-traffic-soars-regulatory-pressure-mounts?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
+https://decrypt.co/377389/67000-more-trezor-customers-exposed-as-data-breach-widens
+https://cryptopotato.com/uniswap-buys-pons-stake-token-jumps-40-to-new-all-time-high/
