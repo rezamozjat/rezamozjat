@@ -810,3 +810,4 @@ https://cointelegraph.com/magazine/white-hats-take-4000-btc-from-liquid-btc-etfs
 https://cointelegraph.com/news/harmony-proposes-shutting-down-layer-1-migrating-one-to-ethereum?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
 https://cryptopotato.com/bitcoin-faces-a-crucial-week-these-us-events-could-decide-btcs-next-big-move/
 https://cointelegraph.com/news/liquid-network-pauses-320m-bitcoin-withdrawal?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
+https://cryptopotato.com/supposed-white-hat-hackers-drain-320-million-in-btc-from-liquid-network-say-theyll-return-it-after-fix/
