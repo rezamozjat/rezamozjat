@@ -951,3 +951,5 @@ https://decrypt.co/377831/bitcoin-wallet-trezor-hackers-breach-email
 https://cointelegraph.com/news/us-sanctions-xinbi-restrains-52m-crypto?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
 https://cryptopotato.com/xrpl-fixes-permission-delegation-after-critical-bug-found/
 https://cryptopotato.com/consensys-and-metamask-to-separate-into-two-independent-companies-by-end-of-2026/
+https://cointelegraph.com/news/trezor-bitbox-hardware-wallet-phishing-emails?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
+https://cryptopotato.com/the-same-us-treasury-move-sent-bitcoin-from-65k-to-80k-so-why-didnt-it-work-this-time/
