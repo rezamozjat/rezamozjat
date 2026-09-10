@@ -995,3 +995,5 @@ https://decrypt.co/377601/coinbase-wallet-rebrand-robinhood-chain
 https://cointelegraph.com/news/esma-warns-growing-crypto-ties-could-amplify-risks-to-traditional-finance?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
 https://cryptopotato.com/3-reasons-why-zcash-zec-can-plunge-following-its-150-monthly-explosion/
 https://decrypt.co/377925/ai-agents-slash-cost-quantum-attack-bitcoin
+https://decrypt.co/377917/deepseek-openai-gpt-6-astra-design-benchmark
+https://decrypt.co/377928/senate-republicans-revised-clarity-act-draft
