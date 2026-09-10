@@ -994,3 +994,4 @@ https://decrypt.co/377903/bitcoin-price-golden-cross-coming
 https://decrypt.co/377601/coinbase-wallet-rebrand-robinhood-chain
 https://cointelegraph.com/news/esma-warns-growing-crypto-ties-could-amplify-risks-to-traditional-finance?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
 https://cryptopotato.com/3-reasons-why-zcash-zec-can-plunge-following-its-150-monthly-explosion/
+https://decrypt.co/377925/ai-agents-slash-cost-quantum-attack-bitcoin
