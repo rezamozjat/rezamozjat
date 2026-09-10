@@ -954,3 +954,4 @@ https://cryptopotato.com/consensys-and-metamask-to-separate-into-two-independent
 https://cointelegraph.com/news/trezor-bitbox-hardware-wallet-phishing-emails?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
 https://cryptopotato.com/the-same-us-treasury-move-sent-bitcoin-from-65k-to-80k-so-why-didnt-it-work-this-time/
 https://cryptopotato.com/fake-trezor-warning-claims-25-of-devices-are-vulnerable-in-latest-phishing-campaign/
+https://cryptopotato.com/another-major-pi-network-pi-update-is-here-what-changes-for-pioneers/
