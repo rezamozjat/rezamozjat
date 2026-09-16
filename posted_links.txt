@@ -1225,3 +1225,4 @@ https://cryptopotato.com/robinhood-chains-tvl-nears-1b-but-failed-l1s-raise-sust
 https://cointelegraph.com/news/house-tax-committee-advances-crypto-tax-overhaul-in-385-vote?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
 https://decrypt.co/378417/fed-hikes-rates-first-time-since-2023-bitcoin
 https://cryptopotato.com/breaking-fed-raises-interest-rates-by-25-bps-bitcoin-price-reacts/
+https://decrypt.co/378430/bitcoin-core-software-october-update
