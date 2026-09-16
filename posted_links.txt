@@ -1212,3 +1212,4 @@ https://decrypt.co/378363/fca-guidance-lands-two-weeks-before-uk-crypto-authoriz
 https://cointelegraph.com/magazine/revolut-id-thefts-highlight-kycs-dangers-heres-how-to-fix-it?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
 https://cryptopotato.com/why-xrp-was-hit-hardest-after-the-clarity-act-senate-failure/
 https://decrypt.co/378323/ai-pause-protect-giants-not-safety-cato-jack-dorsey
+https://decrypt.co/378374/circle-launches-arc-mainnet-with-blackrock-dtcc-and-visa-as-validators
