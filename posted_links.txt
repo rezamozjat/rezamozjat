@@ -1220,3 +1220,4 @@ https://cointelegraph.com/news/coinbase-clarity-act-exposure-saxo?utm_source=rss
 https://cointelegraph.com/news/anchorage-digital-brings-tokenized-uranium-custody-to-federally-chartered-crypto-bank?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
 https://decrypt.co/378381/zuckerberg-pushes-back-ai-slowdown
 https://decrypt.co/378401/hackers-hbo-max-reddit-account-crypto-malware
+https://decrypt.co/378408/cftc-sec-double-down-crypto-clarity-act
