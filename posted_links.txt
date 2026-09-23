@@ -1462,3 +1462,6 @@ https://decrypt.co/379000/coinbase-playbook-post-quantum-bitcoin-custody
 https://decrypt.co/379004/cme-crypto-bitcoin-cash-uniswap-futures
 https://decrypt.co/379006/161-million-decade-old-bitcoin-moves-two-weeks
 https://cryptopotato.com/bitcoins-rally-above-87000-faces-fresh-tests-bitfinex-alpha/
+https://cointelegraph.com/news/cftc-issues-warning-over-risky-prediction-market-mention-contracts?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound
+https://decrypt.co/379008/un-security-council-ai-risks-anthropic-openai-deepseek
+https://cryptopotato.com/animoca-hits-pause-on-reverse-merger-but-its-public-listing-ambitions-arent-going-away/
