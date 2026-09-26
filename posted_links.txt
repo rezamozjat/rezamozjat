@@ -1626,3 +1626,4 @@ https://decrypt.co/379391/bitcoin-etfs-notch-seven-day-winning-streak-as-2026-fl
 https://cryptopotato.com/ethereum-price-analysis-eth-eyes-3k-but-these-major-hurdles-stand-in-the-way/
 https://cryptopotato.com/sec-issues-fresh-crypto-guidance-on-staking-tokens-buybacks-and-the-howey-test/
 https://cryptopotato.com/institutions-watched-bitcoin-fall-50-yet-none-of-15-bitwise-surveyed-investors-cut-exposure/
+https://cryptopotato.com/researchers-propose-zcash-style-privacy-for-bitcoin-without-a-soft-fork/
